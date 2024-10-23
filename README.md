@@ -28,3 +28,8 @@ docker build -t hive:latest .
 ```bash
 docker run --rm --name Hive-Flask -p 5000:5000 hive:latest
 ```
+
+### 4. How to pylint
+```bash
+pylint src/
+```

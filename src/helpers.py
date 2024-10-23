@@ -1,4 +1,3 @@
-# utils.py
 import requests
 
 OPEN_SENSE_MAP_API = "https://api.opensensemap.org/boxes"
