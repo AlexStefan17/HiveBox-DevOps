@@ -1,0 +1,42 @@
+name: HiveBox CI
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on:  ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        users: actions/checkout@v3
+
+      - name: Set up Python
+        uses: action/setup-python@v3
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      # Step 1: Lint the code with pylint
+      - name: Lint Python code
+        run: |
+          pylint src/
+
+      # Step 2: Build Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t hive:latest .
+
+      # Step 3: Run unit Tests
+      - name: Run Unit tests
+        run: |
+          pytest src/tests.py
