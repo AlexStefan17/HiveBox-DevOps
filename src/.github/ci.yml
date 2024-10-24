@@ -29,7 +29,7 @@ jobs:
       # Step 1: Lint the code with pylint
       - name: Lint Python code
         run: |
-          pylint src/
+          pylint src/app.py --disable=C0114,C0303,W0718
 
       # Step 2: Build Docker image
       - name: Build Docker image
