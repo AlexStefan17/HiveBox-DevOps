@@ -1,0 +1,5 @@
+pylint
+flask
+requests
+pytest
+pytest-mock
