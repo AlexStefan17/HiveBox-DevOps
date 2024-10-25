@@ -31,12 +31,17 @@ jobs:
         run: |
           pylint src/
 
-      # Step 2: Build Docker image
+      # Step 2: Lint dockerfile
+      - name: Lint dockerfile
+        run: |
+          docker run --rm -i hadolint/hadolint < Dockerfile
+      
+      # Step 3: Build Docker image
       - name: Build Docker image
         run: |
           docker build -t hive:latest .
 
-      # Step 3: Run unit Tests
+      # Step 4: Run unit Tests
       - name: Run Unit tests
         run: |
           pytest src/tests.py
