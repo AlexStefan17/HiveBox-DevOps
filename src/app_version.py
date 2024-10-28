@@ -1,7 +1,7 @@
 """Module providing a function printing python version."""
 import sys
 
-VERSION = "v0.1.0"
+VERSION = "v0.2.0"
 
 def print_version():
     """Function printing project version."""
