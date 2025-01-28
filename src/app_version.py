@@ -15,7 +15,8 @@ def get_version_from_file(file_path="version.txt"):
         version = file.read().strip()
     return version
 
-
+VERSION = get_version_from_file()
+    
 def print_version():
     """Function printing the project version."""
     version = get_version_from_file()
