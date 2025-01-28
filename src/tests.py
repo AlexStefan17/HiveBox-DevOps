@@ -27,3 +27,4 @@ def test_temperature_endpoint(client, mocker):
     data = response.get_json()
     assert "average_temperature" in data
     assert round(data["average_temperature"], 2) == 22.5
+    assert data["status"] == "Good"
