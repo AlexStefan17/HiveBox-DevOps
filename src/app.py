@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request
 from app_version import VERSION  # Corrected import
 from helpers import fetch_data, calculate_average_temperature
 import os
-
+from prometheus_client import generate_latest, CONTENT_TYPE_LATEST, Counter
 app = Flask(__name__)
 
 # app.config['APP_NAME'] = os.getenv('APP_NAME', 'SenseBox')
@@ -51,6 +51,13 @@ def get_temperature():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+REQUESTS = Counter("app_requests_total", "Total number of requests to the application")
+
+@app.route("/metrics", methods=["GET"])
+def get_metrics():
+    """Expose Prometheus metrics."""
+    REQUESTS.inc()  # Increment the request count
+    return generate_latest(), 200, {'Content-Type': CONTENT_TYPE_LATEST}
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
