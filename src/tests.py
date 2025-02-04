@@ -14,7 +14,7 @@ def test_version_endpoint(client):
     assert response.status_code == 200
     data = response.get_json()
     assert "version" in data
-    assert data["version"] == "v0.5.0"
+    assert data["version"] == "v0.6.0"
     
 def test_temperature_endpoint_cold(client, mocker):
     """Test the /temperature endpoint."""

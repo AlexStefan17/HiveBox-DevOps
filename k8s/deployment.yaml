@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hivebox-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hivebox-app
+  template:
+    metadata:
+      labels:
+        app: hivebox-app
+    spec:
+      containers:
+        - name: hivebox
+          image: hivebox-app:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          env:
+            - name: APP_NAME
+              value: "HiveBox"

@@ -3,4 +3,4 @@ flask
 requests
 pytest
 pytest-mock
-prometheus_client-0.21.1
+prometheus_client
