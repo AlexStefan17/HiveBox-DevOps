@@ -1,13 +1,13 @@
+"""HiveBox DevOps project: Flask API with version, temperature, and metrics endpoints."""
+
 from datetime import datetime, timedelta, timezone
 from flask import Flask, jsonify, request
-from app_version import VERSION  # Corrected import
-from helpers import fetch_data, calculate_average_temperature
-import os
+import requests
 from prometheus_client import generate_latest, CONTENT_TYPE_LATEST, Counter
-app = Flask(__name__)
+from app_version import VERSION
+from helpers import fetch_data, calculate_average_temperature
 
-# app.config['APP_NAME'] = os.getenv('APP_NAME', 'SenseBox')
-# app.config['APP_V'] = os.getenv('APP_NAME', 'SenseBox')
+app = Flask(__name__)
 
 
 @app.route("/", methods=["GET"])
@@ -43,12 +43,11 @@ def get_temperature():
                 status = "Good"
             else:
                 status = "Too Hot"
-                
             return jsonify({"average_temperature": average_temperature,
                             "status": status
                             })
         return jsonify({"error": "No valid temperature available."}), 404
-    except Exception as e:
+    except (requests.exceptions.RequestException, ValueError) as e:
         return jsonify({"error": str(e)}), 500
 
 REQUESTS = Counter("app_requests_total", "Total number of requests to the application")
