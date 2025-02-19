@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: hivebox-ingress
   annotations:
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "120"  # 2 minutes
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
     nginx.ingress.kubernetes.io/proxy-connect-timeout: "30"
 spec:
   ingressClassName: nginx
