@@ -6,11 +6,6 @@ on:
       - completed
   workflow_dispatch:
 
-name: Scorecard supply-chain security
-on:
-  branch_protection_rule:
-  workflow_dispatch:
-
 permissions: read-all
 
 jobs:
