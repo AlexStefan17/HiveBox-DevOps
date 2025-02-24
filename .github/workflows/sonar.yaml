@@ -26,12 +26,14 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: SonarQube Analysis
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}  # Use your self-hosted SonarQube URL
-        run: |
-          sonar-scanner -Dsonar.projectKey=my-project \
-                        -Dsonar.sources=src \
-                        -Dsonar.host.url=$SONAR_HOST_URL \
-                        -Dsonar.login=$SONAR_TOKEN
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=HiveBox
+            -Dsonar.sources=src
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
